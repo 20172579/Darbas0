@@ -1,7 +1,37 @@
 #include <iostream>
 #include <algorithm>
-
+#include <string>
+#include <fstream>
+#include <iomanip>
 using namespace std;
+
+void skaitau() {
+    int h1,h2,h3,h4,h5,exam;
+    string name,surname;
+    ifstream inFile;
+    inFile.open("Students.txt");
+    string line;
+    inFile>>line;
+
+    if (inFile.is_open())
+        getline(inFile,line);
+  {
+    while ( getline (inFile,line) )
+    {
+     inFile>>name>>surname>>h1>>h2>>h3>>h4>>h5>>exam;
+    }
+    inFile.close();
+  }
+
+  cout<<name<<surname<<h1<<h2<<h3<<h4<<h5<<exam<<endl;
+}
+
+int blabla(){
+    int a,b;
+    a = 5;
+    b = 7;
+    return a+b;
+}
 
 int main()
 {
@@ -10,14 +40,24 @@ int main()
     int n=1000;
     float exam = 0.0;
     bool median = false;
-    int medianSum = 0;
+    float medianSum = 0;
     string answer;
-    int homeworkSum = 0;
+    float homeworkSum = 0;
     bool knownN = false;
     int tempoI = 0;
     int home = 0;
-    float averageOfHomework  = 0.0;
 
+
+
+    float averageOfHomework  = 0.0;
+   skaitau();
+
+   int rez;
+   rez = blabla();
+
+cout<<rez<<endl;
+
+cout<<name<<" "<<surname<<endl;
     cout<<"Enter your name and surname"<<endl;
     cin>>name>>surname;
 
@@ -31,6 +71,7 @@ int main()
         knownN = true;
         cout<<"Enter n"<<endl;
         cin>>n;
+        cout<<"Enter grades"<<endl;
     }
     int homework[n];
 
@@ -64,11 +105,12 @@ int main()
     if(n % 2 == 0){
         sort(homework, homework+n);
         int indicator = n / 2;
-        medianSum= homework[indicator] + homework[indicator-1];
+        medianSum= (homework[indicator] + homework[indicator-1])/2;
     } else{
+        sort(homework, homework+n);
         int indicator = n / 2;
         medianSum = homework[indicator];
-        cout<<medianSum<<endl;
+
     }
         for(int i = 0; i< n ; i++){
             homeworkSum += homework[i];
@@ -77,18 +119,28 @@ int main()
 
         float final_points = 0.4 * averageOfHomework + 0.6 * exam;
 
+
     if(median){
-    cout<<"Surname     Name          Final points (Avg.) / Final points (Med.) "<<endl;
-    cout<<".............................................  "<<endl;
-    cout<<surname<<"        "<<name<<"          "<<medianSum<<endl;
+
+    cout<<left<<setw(30)<<"Surname";
+    cout<<left<<setw(30)<<"Name";
+    cout<<left<<setw(30)<<"Final points (Avg.)";
+    cout<<left<<setw(30)<<"Final points (Med.)"<<endl;
+
+    cout<<left<<setw(30)<<surname;
+    cout<<left<<setw(30)<<name;
+    cout<<left<<setw(30)<<setprecision(2)<<final_points;
+    cout<<left<<setw(30)<<setprecision(2)<<medianSum<<endl;
+
     }else{
-        cout<<"Surname     Name          Final points (Avg.)  "<<endl;
-    cout<<".............................................  "<<endl;
-    cout<<surname<<"   "<<name<<"        "<<final_points<<endl;
+
+    cout<<left<<setw(30)<<"Surname";
+    cout<<left<<setw(30)<<"Name";
+    cout<<left<<setw(30)<<"Final points (Avg.)"<<endl;
+
+    cout<<left<<setw(30)<<surname;
+    cout<<left<<setw(30)<<name;
+    cout<<left<<setw(30)<<setprecision(2)<<final_points;
+
     }
-
-
-
-
-
 }
